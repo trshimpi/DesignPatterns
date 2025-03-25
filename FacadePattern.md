@@ -20,10 +20,10 @@ The **Facade Pattern** is a **structural design pattern** that provides a **simp
 ---
 
 ## **4. When to Use Facade Pattern?**
-✔ When a system is **too complex** and you want to provide a **simplified interface**.
-✔ When you need to **decouple clients** from intricate subsystem details.
-✔ When you want to **improve maintainability** by reducing dependencies.
-✔ When working with **legacy systems** where a cleaner interface is required.
+- When a system is **too complex** and you want to provide a **simplified interface**.
+- When you need to **decouple clients** from intricate subsystem details.
+- When you want to **improve maintainability** by reducing dependencies.
+- When working with **legacy systems** where a cleaner interface is required.
 
 ---
 
@@ -115,21 +115,21 @@ The **Facade** hides the complexity of setting up the home theater and provides 
 ---
 
 ## **7. Real-World Examples**
-✔ **Spring Framework’s JdbcTemplate** – Simplifies database interactions.
-✔ **Operating Systems** – Provides a unified API to manage files, devices, and processes.
-✔ **Payment Gateways** – Exposes a single API while handling various banking systems internally.
+- **Spring Framework’s JdbcTemplate** – Simplifies database interactions.
+- **Operating Systems** – Provides a unified API to manage files, devices, and processes.
+- **Payment Gateways** – Exposes a single API while handling various banking systems internally.
 
 ---
 
 ## **8. Advantages & Disadvantages**
 ### ✅ **Advantages**
-✔ **Simplifies complex systems** by providing a high-level interface.
-✔ **Reduces dependencies** between clients and subsystems.
-✔ **Improves maintainability** by decoupling different parts of the system.
+- **Simplifies complex systems** by providing a high-level interface.
+- **Reduces dependencies** between clients and subsystems.
+- **Improves maintainability** by decoupling different parts of the system.
 
 ### ❌ **Disadvantages**
-✘ **Overuse** can lead to a **god object** that holds too much responsibility.
-✘ **Limited flexibility** if new functionalities need to be exposed from subsystems.
+- **Overuse** can lead to a **god object** that holds too much responsibility.
+- **Limited flexibility** if new functionalities need to be exposed from subsystems.
 
 ---
 
