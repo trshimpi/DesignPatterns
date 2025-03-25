@@ -17,7 +17,11 @@ The **Proxy Pattern** is a **structural design pattern** that provides a **surro
 
 ## 3. When to Use the Proxy Pattern?
 
-✔ When you want to **control access** to an object, such as in security-sensitive operations. ✔ When creating **expensive objects lazily** (e.g., database connections, file I/O). ✔ When implementing **caching** to avoid redundant operations. ✔ When adding **logging or monitoring** to method calls. ✔ When using **remote objects** in distributed applications (e.g., RMI, Web Services).
+- When you want to **control access** to an object, such as in security-sensitive operations.
+- When creating **expensive objects lazily** (e.g., database connections, file I/O).
+- When implementing **caching** to avoid redundant operations.
+- When adding **logging or monitoring** to method calls.
+- When using **remote objects** in distributed applications (e.g., RMI, Web Services).
 
 ---
 
@@ -107,9 +111,9 @@ public class ProxyPatternExample {
 
 ### ❌ Disadvantages
 
-✘ Introduces **extra complexity** in code. 
-✘ Can cause **performance overhead** if used excessively. 
-✘ May **increase response time** due to additional processing.
+- Introduces **extra complexity** in code.
+- Can cause **performance overhead** if used excessively.
+- May **increase response time** due to additional processing.
 
 ---
 
