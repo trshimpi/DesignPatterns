@@ -100,9 +100,9 @@ public class ProxyPatternExample {
 
 ### ✅ Advantages
 
-✔ Improves **performance** with lazy initialization and caching. 
-✔ Enhances **security** by controlling object access. 
-✔ Allows **monitoring and logging** transparently. 
+✔ Improves **performance** with lazy initialization and caching.
+✔ Enhances **security** by controlling object access.
+✔ Allows **monitoring and logging** transparently.
 ✔ Supports **distributed systems** by representing remote objects.
 
 ### ❌ Disadvantages
