@@ -145,4 +145,3 @@ Simple Coffee, Milk, Sugar -> Cost: $7.0
 ## 🔥 Conclusion
 The **Decorator Pattern** is a flexible way to **add responsibilities to objects dynamically**. It is widely used in **GUI frameworks, text processing, and I/O streams** (e.g., Java I/O classes). However, excessive use can lead to maintainability challenges.
 
-Would you like notes on another pattern? 😊
