@@ -89,10 +89,10 @@ public class ProxyPatternExample {
 
 ## 6. Real-World Examples
 
-✔ **Hibernate Lazy Loading** – Uses a proxy to load objects only when needed. 
-✔ **Spring AOP (Aspect-Oriented Programming)** – Uses proxies to implement logging, security, and transactions. 
-✔ **Java RMI (Remote Method Invocation)** – Uses proxies for remote method execution. 
-✔ **Web Services (SOAP, REST)** – Clients interact with a proxy that communicates with a remote server.
+-  **Hibernate Lazy Loading** – Uses a proxy to load objects only when needed.
+-  **Spring AOP (Aspect-Oriented Programming)** – Uses proxies to implement logging, security, and transactions.
+-  **Java RMI (Remote Method Invocation)** – Uses proxies for remote method execution.
+-  **Web Services (SOAP, REST)** – Clients interact with a proxy that communicates with a remote server.
 
 ---
 
@@ -100,10 +100,10 @@ public class ProxyPatternExample {
 
 ### ✅ Advantages
 
-✔ Improves **performance** with lazy initialization and caching.
-✔ Enhances **security** by controlling object access.
-✔ Allows **monitoring and logging** transparently.
-✔ Supports **distributed systems** by representing remote objects.
+- Improves **performance** with lazy initialization and caching.
+- Enhances **security** by controlling object access.
+- Allows **monitoring and logging** transparently.
+- Supports **distributed systems** by representing remote objects. 
 
 ### ❌ Disadvantages
 
