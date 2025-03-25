@@ -1,131 +1,134 @@
-# Flyweight Design Pattern
+### **Flyweight Design Pattern - Explanation**  
 
-## Overview
-The **Flyweight Pattern** is a **structural design pattern** used to **reduce memory usage** and **increase performance** by sharing common object state instead of creating multiple instances of identical objects.
-
-## When to Use?
-- When a large number of **similar objects** exist in the system.
-- When object creation is **memory-intensive** and must be minimized.
-- When objects can be **split into intrinsic (shared) and extrinsic (unique) states**.
-
-## Key Features
-- **Minimizes memory usage** by sharing objects.
-- Uses **factories** to manage shared instances.
-- **Intrinsic state** (shared data) remains constant across objects.
-- **Extrinsic state** (unique data) is supplied externally at runtime.
+#### **1. Definition**  
+The **Flyweight Pattern** is a **structural design pattern** used to **minimize memory usage** and **increase performance** by sharing common object states instead of creating new instances. It is useful when dealing with a **large number of similar objects**.  
 
 ---
 
-## Implementation Steps
-1. **Create the Flyweight Interface** → Defines the method(s) for concrete flyweights.
-2. **Implement Concrete Flyweight** → Implements the shared behavior and stores intrinsic state.
-3. **Create a Flyweight Factory** → Manages shared instances and returns existing objects when available.
-4. **Use the Flyweight in the Client** → Avoids creating duplicate objects by using the factory.
+#### **2. Key Concepts**  
+- **Intrinsic State**: Shared, immutable data stored in the Flyweight object.  
+- **Extrinsic State**: Context-specific data that is passed to the Flyweight object when needed.  
+- **Flyweight Factory**: Manages and reuses Flyweight objects instead of creating new ones.  
 
 ---
 
-## Example: Tree Rendering in a Forest 🌲
-Imagine a **forest** where many trees exist. Instead of creating separate tree objects, we share common attributes (e.g., tree type, texture, color) while maintaining unique positions.
+#### **3. Key Components**  
+1. **Flyweight Interface** – Defines the common operations for Flyweight objects.  
+2. **Concrete Flyweight** – Implements the Flyweight interface and stores the intrinsic state.  
+3. **Flyweight Factory** – Creates and manages Flyweight objects, ensuring object reuse.  
+4. **Client** – Uses Flyweight objects and passes the extrinsic state dynamically.  
 
-### Step 1: Create the Flyweight Interface
+---
+
+### **4. When to Use the Flyweight Pattern?**  
+✔ When you have a **large number of objects** consuming significant memory.  
+✔ When objects share **common immutable state** and only differ in small, context-specific data.  
+✔ When performance and memory optimization are **critical**.  
+✔ When creating objects dynamically would lead to **high memory consumption**.  
+
+---
+
+### **Example in Java**  
+**Scenario:**  
+Suppose we are designing a **text editor** where each character is an object. Instead of creating a separate object for each character, we reuse shared objects for the same character (Intrinsic state) while maintaining unique positions (Extrinsic state).  
+
+---
+
+#### **Step 1: Create the Flyweight Interface**
 ```java
-interface Tree {
-    void display(int x, int y);
+// Flyweight Interface
+interface CharacterFlyweight {
+    void display(int fontSize, String fontColor);
 }
 ```
 
-### Step 2: Implement the Concrete Flyweight
+#### **Step 2: Create Concrete Flyweight**
 ```java
-class TreeType implements Tree {
-    private final String name;
-    private final String color;
-    private final String texture;
-    
-    public TreeType(String name, String color, String texture) {
-        this.name = name;
-        this.color = color;
-        this.texture = texture;
+// Concrete Flyweight: Represents a specific character
+class Character implements CharacterFlyweight {
+    private final char symbol; // Intrinsic state (shared)
+
+    public Character(char symbol) {
+        this.symbol = symbol;
     }
-    
+
     @Override
-    public void display(int x, int y) {
-        System.out.println("Displaying " + name + " at (" + x + ", " + y + ") with color " + color);
+    public void display(int fontSize, String fontColor) {
+        System.out.println("Character: " + symbol + ", Font Size: " + fontSize + ", Font Color: " + fontColor);
     }
 }
 ```
 
-### Step 3: Implement the Flyweight Factory
+#### **Step 3: Create Flyweight Factory**
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
-class TreeFactory {
-    private static final Map<String, TreeType> treeTypes = new HashMap<>();
-    
-    public static TreeType getTreeType(String name, String color, String texture) {
-        String key = name + "-" + color + "-" + texture;
-        if (!treeTypes.containsKey(key)) {
-            treeTypes.put(key, new TreeType(name, color, texture));
-            System.out.println("Creating new TreeType: " + key);
-        }
-        return treeTypes.get(key);
+// Flyweight Factory: Manages shared Character objects
+class CharacterFactory {
+    private static final Map<Character, CharacterFlyweight> characterPool = new HashMap<>();
+
+    public static CharacterFlyweight getCharacter(char symbol) {
+        characterPool.putIfAbsent(symbol, new Character(symbol));
+        return characterPool.get(symbol);
+    }
+
+    public static int getTotalCharactersCreated() {
+        return characterPool.size();
     }
 }
 ```
 
-### Step 4: Use Flyweight in the Client
+#### **Step 4: Client Code**
 ```java
-class Forest {
+public class FlyweightPatternExample {
     public static void main(String[] args) {
-        Tree tree1 = TreeFactory.getTreeType("Oak", "Green", "Smooth");
-        tree1.display(10, 20);
-        
-        Tree tree2 = TreeFactory.getTreeType("Oak", "Green", "Smooth");
-        tree2.display(30, 40);
-        
-        Tree tree3 = TreeFactory.getTreeType("Pine", "Dark Green", "Rough");
-        tree3.display(50, 60);
+        // Creating characters using Flyweight Factory
+        CharacterFlyweight c1 = CharacterFactory.getCharacter('A');
+        c1.display(12, "Red");
+
+        CharacterFlyweight c2 = CharacterFactory.getCharacter('B');
+        c2.display(14, "Blue");
+
+        CharacterFlyweight c3 = CharacterFactory.getCharacter('A'); // Reusing 'A'
+        c3.display(16, "Green");
+
+        System.out.println("Total unique Character objects created: " + CharacterFactory.getTotalCharactersCreated());
     }
 }
 ```
 
-### ✅ Output
+#### **Output:**
 ```
-Creating new TreeType: Oak-Green-Smooth
-Displaying Oak at (10, 20) with color Green
-Displaying Oak at (30, 40) with color Green
-Creating new TreeType: Pine-Dark Green-Rough
-Displaying Pine at (50, 60) with color Dark Green
+Character: A, Font Size: 12, Font Color: Red
+Character: B, Font Size: 14, Font Color: Blue
+Character: A, Font Size: 16, Font Color: Green
+Total unique Character objects created: 2
 ```
 
----
-
-## Advantages ✅
-✔ **Reduces memory usage** by sharing objects.  
-✔ **Improves performance** by avoiding repeated object creation.  
-✔ **Supports large-scale applications** like rendering trees, icons, or game objects.
-
-## Disadvantages ❌
-❌ **Complexity increases** due to managing shared instances.  
-❌ **Not useful if objects have too many unique attributes**, making sharing ineffective.
+Here, instead of creating a new object for each **'A'**, the factory reuses the same instance, optimizing memory usage.
 
 ---
 
-## Real-World Examples 🌎
-- **Text Editors** → Character glyphs are shared instead of creating new ones for each letter.
-- **GUI Applications** → Icons and UI components are reused.
-- **Games** → Rendering thousands of similar objects (e.g., trees, NPCs).
-- **Database Connection Pooling** → Reusing database connections.
+### **5. Real-World Examples**
+✔ **Text Rendering in IDEs** – Same characters in different styles share intrinsic data.  
+✔ **Game Development** – Large sets of trees, enemies, or bullet objects are reused.  
+✔ **Icons in UI Frameworks** – Common icons are stored once and reused across the application.  
+✔ **Database Connection Pooling** – Connections are shared rather than creating new ones every time.  
 
 ---
 
-## When NOT to Use Flyweight Pattern?
-- When **objects have unique state**, making sharing impractical.
-- When **object creation is cheap** and memory optimization isn't critical.
+### **6. Advantages & Disadvantages**
+#### ✅ **Advantages**  
+✔ **Memory Optimization** – Reduces RAM usage by reusing objects.  
+✔ **Improved Performance** – Less object creation results in faster execution.  
+✔ **Scalability** – Helps manage a large number of objects efficiently.  
+
+#### ❌ **Disadvantages**  
+✘ **Complexity** – Requires additional logic for managing shared objects.  
+✘ **Not Suitable for Mutable Objects** – Works best when the intrinsic state is immutable.  
 
 ---
 
-## 🔥 Conclusion
-The **Flyweight Pattern** optimizes memory usage by **sharing common object state**. It is widely used in applications requiring **large-scale object rendering** like **graphics, UI elements, and games**. However, improper use can add **unnecessary complexity**.
-
-Would you like notes on another pattern? 😊
+### **7. Conclusion**  
+The **Flyweight Pattern** is ideal for reducing memory consumption when dealing with **a massive number of similar objects**. By separating **intrinsic (shared) and extrinsic (context-specific) states**, it enhances **performance and scalability**. 🚀
