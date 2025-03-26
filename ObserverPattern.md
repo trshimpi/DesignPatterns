@@ -145,4 +145,4 @@ public class ObserverPatternExample {
 
 ---
 
-This pattern is commonly used in real-world applications where **event-driven programming** is needed. Let me know if you need more details or examples! 🚀
+This pattern is commonly used in real-world applications where **event-driven programming** is needed.
